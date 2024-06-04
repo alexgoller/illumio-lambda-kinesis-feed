@@ -1,0 +1,229 @@
+{
+  "partial": false,
+  "policies": [
+    {
+      "document": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "PrettyCoolEventsKinesisPutRecords",
+            "Effect": "Allow",
+            "Action": [
+              "kinesis:PutRecord",
+              "kinesis:AddTagsToStream",
+              "kinesis:PutRecords"
+            ],
+            "Resource": "arn:aws:kinesis:region:account:stream/Kinesis-Stream"
+          },
+          {
+            "Sid": "PrettyCoolEventsKinesisListStreams",
+            "Effect": "Allow",
+            "Action": "kinesis:ListStreams",
+            "Resource": "*"
+          }
+        ]
+      },
+      "name": "Lambda-Pretty-Cool-Events",
+      "type": "inline"
+    },
+    {
+      "arn": "arn:aws:iam::account:policy/service-role/AWSLambdaBasicExecutionRole",
+      "document": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "logs:CreateLogGroup"
+            ],
+            "Resource": "arn:aws:logs:region:123456789012:*"
+          },
+          {
+            "Effect": "Allow",
+            "Action": [
+              "logs:CreateLogStream",
+              "logs:PutLogEvents"
+            ],
+            "Resource": [
+              "arn:aws:logs:region:123456789012:log-group:/aws/lambda/*"
+            ]
+          },
+          {
+            "Sid": "Statement1",
+            "Effect": "Allow",
+            "Action": [
+              "secretsmanager:ListSecrets",
+              "secretsmanager:DescribeSecret",
+              "secretsmanager:GetSecretValue"
+            ],
+            "Resource": [
+              "arn:aws:secretsmanager:region:123456789012:secret:prod/secret-name"
+            ]
+          }
+        ]
+      },
+      "id": "ANPAUUXYFIWPDVHVEXKN2",
+      "name": "AWSLambdaBasicExecutionRole",
+      "type": "managed"
+    }
+  ],
+  "resources": {
+    "kinesis": {
+      "service": {
+        "icon": "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNjQgNjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGcgdHJhbnNmb3JtPSJzY2FsZSguOCkiPgogICAgPGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgPHBhdGggZD0iTTAgMGg4MHY4MEgweiIgZmlsbD0iIzhDNEZGRiIvPgogICAgICA8cGF0aCBkPSJNMTkgNjJoMmMwLTguNDA2IDUuNDY1LTE3IDQ2LTE3di0yYy00Mi4yOTcgMC00OCA5LjYwNC00OCAxOW02IDZoMmMwLTcuNTY2IDAtMTkgNDAtMTl2LTJjLTE4LjMzNyAwLTMwLjI3MiAyLjM1OS0zNi40OSA3LjIxMkMyNSA1OC41MTIgMjUgNjMuOTk2IDI1IDY4TTE1IDI2aC0yYzAgNy4zOTYgMTAuMDM5IDEyLjA4IDI5Ljg5MyAxNEMyMy4wMzkgNDEuOTIgMTMgNDYuNjA0IDEzIDU0aDJjMC00Ljg1NSA2Ljc1Ni0xMyA1Mi0xM3YtMmMtNDUuMjQ0IDAtNTItOC4xNDUtNTItMTNtNi04aC0yYzAgOS4zOTYgNS43MDMgMTkgNDggMTl2LTJjLTQwLjUzNSAwLTQ2LTguNTk0LTQ2LTE3bTQ2IDEzdjJjLTE4LjMzNyAwLTMwLjI3Mi0yLjM1OS0zNi40OS03LjIxMkMyNSAyMS40ODggMjUgMTYuMDA0IDI1IDEyaDJjMCA3LjU2NiAwIDE5IDQwIDE5IiBmaWxsPSIjRkZGIi8+CiAgICA8L2c+CiAgPC9nPgo8L3N2Zz4K",
+        "name": "Amazon Kinesis Data Streams"
+      },
+      "statements": [
+        {
+          "action": "kinesis:PutRecord",
+          "effect": "Allow",
+          "resource": "arn:aws:kinesis:region:123456789012:stream/Pretty-Cool-Events-Stream",
+          "service": "kinesis",
+          "source": {
+            "index": "PrettyCoolEventsKinesisPutRecords",
+            "policyName": "Lambda-Pretty-Cool-Events",
+            "policyType": "inline"
+          }
+        },
+        {
+          "action": "kinesis:AddTagsToStream",
+          "effect": "Allow",
+          "resource": "arn:aws:kinesis:region:123456789012:stream/Pretty-Cool-Events-Stream",
+          "service": "kinesis",
+          "source": {
+            "index": "PrettyCoolEventsKinesisPutRecords",
+            "policyName": "Lambda-Pretty-Cool-Events",
+            "policyType": "inline"
+          }
+        },
+        {
+          "action": "kinesis:PutRecords",
+          "effect": "Allow",
+          "resource": "arn:aws:kinesis:region:123456789012:stream/Pretty-Cool-Events-Stream",
+          "service": "kinesis",
+          "source": {
+            "index": "PrettyCoolEventsKinesisPutRecords",
+            "policyName": "Lambda-Pretty-Cool-Events",
+            "policyType": "inline"
+          }
+        },
+        {
+          "action": "kinesis:ListStreams",
+          "effect": "Allow",
+          "resource": "*",
+          "service": "kinesis",
+          "source": {
+            "index": "PrettyCoolEventsKinesisListStreams",
+            "policyName": "Lambda-Pretty-Cool-Events",
+            "policyType": "inline"
+          }
+        }
+      ]
+    },
+    "logs": {
+      "service": {
+        "icon": "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNjQgNjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGcgdHJhbnNmb3JtPSJzY2FsZSguOCkiPgogICAgPGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgPHBhdGggZD0iTTAgMGg4MHY4MEgweiIgZmlsbD0iI0U3MTU3QiIvPgogICAgICA8cGF0aCBkPSJNNTUuMDYgNDYuNzc3YzAtMy45MDktMy4yMDItNy4wOS03LjEzOC03LjA5LTMuOTM1IDAtNy4xMzYgMy4xODEtNy4xMzYgNy4wOSAwIDMuOTEgMy4yIDcuMDkgNy4xMzYgNy4wOXM3LjEzNy0zLjE4IDcuMTM3LTcuMDltMi4wMSAwYzAgNS4wMTEtNC4xMDMgOS4wODctOS4xNDcgOS4wODctNS4wNDMgMC05LjE0Ny00LjA3Ni05LjE0Ny05LjA4NyAwLTUuMDEgNC4xMDQtOS4wODYgOS4xNDctOS4wODYgNS4wNDQgMCA5LjE0OCA0LjA3NiA5LjE0OCA5LjA4Nm04LjQ0IDEzLjY5N0w1OC41IDU0LjIwM2ExMy4wMzMgMTMuMDMzIDAgMDEtMS45NDcgMi4xNmw2Ljk5OCA2LjI3YTEuNDc0IDEuNDc0IDAgMDAyLjA2Ni0uMTA3IDEuNDUzIDEuNDUzIDAgMDAtLjEwOC0yLjA1Mm0tMTcuNTg4LTIuODEyYzYuMDQzIDAgMTAuOTU4LTQuODgzIDEwLjk1OC0xMC44ODVzLTQuOTE1LTEwLjg4NC0xMC45NTgtMTAuODg0Yy02LjA0MSAwLTEwLjk1NyA0Ljg4Mi0xMC45NTcgMTAuODg0IDAgNi4wMDIgNC45MTYgMTAuODg1IDEwLjk1NyAxMC44ODVtMTkuMTkgNi4yQTMuNDgzIDMuNDgzIDAgMDE2NC41MjkgNjVhMy40NzUgMy40NzUgMCAwMS0yLjMyMi0uODgzTDU0LjkzMSA1Ny42YTEyLjkzNSAxMi45MzUgMCAwMS03LjAwOSAyLjA2Yy03LjE1IDAtMTIuOTY3LTUuNzc5LTEyLjk2Ny0xMi44ODIgMC03LjEwMiA1LjgxNy0xMi44ODEgMTIuOTY3LTEyLjg4MSA3LjE1MSAwIDEyLjk2OSA1Ljc3OSAxMi45NjkgMTIuODgxIDAgMi4wMzgtLjQ5MiAzLjk2LTEuMzQ0IDUuNjc0bDcuMzA5IDYuNTRhMy40NDQgMy40NDQgMCAwMS4yNTYgNC44NzJNMjEuMjggMjkuMzkzYzAgLjUxOS4wMzIgMS4wMzYuMDk0IDEuNTM2YS45OTQuOTk0IDAgMDEtLjgyMyAxLjEwNmMtMi40NzIuNjM0LTYuNTQgMi41NTMtNi41NCA4LjMxIDAgNC4zNDggMi40MTMgNi43NDggNC40MzkgNy45OTYuNjkxLjQzMyAxLjUxLjY2NCAyLjM3My42NzNsMTIuMTIyLjAxMS0uMDAyIDEuOTk3LTEyLjEzMS0uMDFjLTEuMjQ2LS4wMTQtMi40MjgtLjM1MS0zLjQyOC0uOTc3QzE1LjM3NyA0OC43OTcgMTIgNDUuODkgMTIgNDAuMzQ1YzAtNi42ODMgNC42LTkuMTUzIDcuMy0xMC4wMjYtLjAyLS4zMDctLjAzLS42MTctLjAzLS45MjYgMC01LjQ2IDMuNzI4LTExLjEyMyA4LjY3Mi0xMy4xNzEgNS43ODItMi40MDcgMTEuOTA4LTEuMjE0IDE2LjM4NCAzLjE4OSAxLjM4OCAxLjM2NCAyLjUyOSAzLjAyIDMuNDA0IDQuOTM3YTYuNTA5IDYuNTA5IDAgMDE0LjE1NC0xLjUwMmMzLjAwMiAwIDYuMzgyIDIuMjY0IDYuOTg0IDcuMjE1IDIuODEyLjY0NCA4Ljc1MyAyLjg5NCA4Ljc1MyAxMC4zNjIgMCAyLjk4MS0uOTQxIDUuNDQ0LTIuNzk4IDcuMzE5bC0xLjQzMy0xLjQwMWMxLjQ3My0xLjQ4OCAyLjIyLTMuNDc5IDIuMjItNS45MTggMC02LjUzMi01LjUwNC04LjE1Ny03Ljg3My04LjU1MWExLjAwMiAxLjAwMiAwIDAxLS44MjMtMS4xNTdjLS4zMjktNC4wNTUtMi43NTMtNS44NzItNS4wMy01Ljg3Mi0xLjQzNyAwLTIuNzg0LjY5NS0zLjY5NyAxLjkwN2ExLjAwNiAxLjAwNiAwIDAxLTEuNzUtLjI1OGMtLjgyMy0yLjI2Ni0yLjAxLTQuMTcxLTMuNTI1LTUuNjYxLTMuODgtMy44MTYtOS4xODQtNC44NS0xNC4xOTUtMi43NjYtNC4xNyAxLjcyNy03LjQzNyA2LjcwMi03LjQzNyAxMS4zMjgiIGZpbGw9IiNGRkYiLz4KICAgIDwvZz4KICA8L2c+Cjwvc3ZnPgo=",
+        "name": "Amazon CloudWatch Logs"
+      },
+      "statements": [
+        {
+          "action": "logs:CreateLogGroup",
+          "effect": "Allow",
+          "resource": "arn:aws:logs:region:123456789012:*",
+          "service": "logs",
+          "source": {
+            "index": "0",
+            "policyName": "AWSLambdaBasicExecutionRole",
+            "policyType": "managed"
+          }
+        },
+        {
+          "action": "logs:CreateLogStream",
+          "effect": "Allow",
+          "resource": "arn:aws:logs:region:123456789012:log-group:/aws/lambda/*",
+          "service": "logs",
+          "source": {
+            "index": "1",
+            "policyName": "AWSLambdaBasicExecutionRole",
+            "policyType": "managed"
+          }
+        },
+        {
+          "action": "logs:PutLogEvents",
+          "effect": "Allow",
+          "resource": "arn:aws:logs:region:123456789012:log-group:/aws/lambda/*",
+          "service": "logs",
+          "source": {
+            "index": "1",
+            "policyName": "AWSLambdaBasicExecutionRole",
+            "policyType": "managed"
+          }
+        }
+      ]
+    },
+    "events": {
+      "service": {
+        "icon": "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNjQgNjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGcgdHJhbnNmb3JtPSJzY2FsZSguOCkiPgogICAgPGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgPHBhdGggZD0iTTAgMGg4MHY4MEgweiIgZmlsbD0iI0U3MTU3QiIvPgogICAgICA8cGF0aCBkPSJNNTUuMDYgNDYuNzc3YzAtMy45MDktMy4yMDItNy4wOS03LjEzOC03LjA5LTMuOTM1IDAtNy4xMzYgMy4xODEtNy4xMzYgNy4wOSAwIDMuOTEgMy4yIDcuMDkgNy4xMzYgNy4wOXM3LjEzNy0zLjE4IDcuMTM3LTcuMDltMi4wMSAwYzAgNS4wMTEtNC4xMDMgOS4wODctOS4xNDcgOS4wODctNS4wNDMgMC05LjE0Ny00LjA3Ni05LjE0Ny05LjA4NyAwLTUuMDEgNC4xMDQtOS4wODYgOS4xNDctOS4wODYgNS4wNDQgMCA5LjE0OCA0LjA3NiA5LjE0OCA5LjA4Nm04LjQ0IDEzLjY5N0w1OC41IDU0LjIwM2ExMy4wMzMgMTMuMDMzIDAgMDEtMS45NDcgMi4xNmw2Ljk5OCA2LjI3YTEuNDc0IDEuNDc0IDAgMDAyLjA2Ni0uMTA3IDEuNDUzIDEuNDUzIDAgMDAtLjEwOC0yLjA1Mm0tMTcuNTg4LTIuODEyYzYuMDQzIDAgMTAuOTU4LTQuODgzIDEwLjk1OC0xMC44ODVzLTQuOTE1LTEwLjg4NC0xMC45NTgtMTAuODg0Yy02LjA0MSAwLTEwLjk1NyA0Ljg4Mi0xMC45NTcgMTAuODg0IDAgNi4wMDIgNC45MTYgMTAuODg1IDEwLjk1NyAxMC44ODVtMTkuMTkgNi4yQTMuNDgzIDMuNDgzIDAgMDE2NC41MjkgNjVhMy40NzUgMy40NzUgMCAwMS0yLjMyMi0uODgzTDU0LjkzMSA1Ny42YTEyLjkzNSAxMi45MzUgMCAwMS03LjAwOSAyLjA2Yy03LjE1IDAtMTIuOTY3LTUuNzc5LTEyLjk2Ny0xMi44ODIgMC03LjEwMiA1LjgxNy0xMi44ODEgMTIuOTY3LTEyLjg4MSA3LjE1MSAwIDEyLjk2OSA1Ljc3OSAxMi45NjkgMTIuODgxIDAgMi4wMzgtLjQ5MiAzLjk2LTEuMzQ0IDUuNjc0bDcuMzA5IDYuNTRhMy40NDQgMy40NDQgMCAwMS4yNTYgNC44NzJNMjEuMjggMjkuMzkzYzAgLjUxOS4wMzIgMS4wMzYuMDk0IDEuNTM2YS45OTQuOTk0IDAgMDEtLjgyMyAxLjEwNmMtMi40NzIuNjM0LTYuNTQgMi41NTMtNi41NCA4LjMxIDAgNC4zNDggMi40MTMgNi43NDggNC40MzkgNy45OTYuNjkxLjQzMyAxLjUxLjY2NCAyLjM3My42NzNsMTIuMTIyLjAxMS0uMDAyIDEuOTk3LTEyLjEzMS0uMDFjLTEuMjQ2LS4wMTQtMi40MjgtLjM1MS0zLjQyOC0uOTc3QzE1LjM3NyA0OC43OTcgMTIgNDUuODkgMTIgNDAuMzQ1YzAtNi42ODMgNC42LTkuMTUzIDcuMy0xMC4wMjYtLjAyLS4zMDctLjAzLS42MTctLjAzLS45MjYgMC01LjQ2IDMuNzI4LTExLjEyMyA4LjY3Mi0xMy4xNzEgNS43ODItMi40MDcgMTEuOTA4LTEuMjE0IDE2LjM4NCAzLjE4OSAxLjM4OCAxLjM2NCAyLjUyOSAzLjAyIDMuNDA0IDQuOTM3YTYuNTA5IDYuNTA5IDAgMDE0LjE1NC0xLjUwMmMzLjAwMiAwIDYuMzgyIDIuMjY0IDYuOTg0IDcuMjE1IDIuODEyLjY0NCA4Ljc1MyAyLjg5NCA4Ljc1MyAxMC4zNjIgMCAyLjk4MS0uOTQxIDUuNDQ0LTIuNzk4IDcuMzE5bC0xLjQzMy0xLjQwMWMxLjQ3My0xLjQ4OCAyLjIyLTMuNDc5IDIuMjItNS45MTggMC02LjUzMi01LjUwNC04LjE1Ny03Ljg3My04LjU1MWExLjAwMiAxLjAwMiAwIDAxLS44MjMtMS4xNTdjLS4zMjktNC4wNTUtMi43NTMtNS44NzItNS4wMy01Ljg3Mi0xLjQzNyAwLTIuNzg0LjY5NS0zLjY5NyAxLjkwN2ExLjAwNiAxLjAwNiAwIDAxLTEuNzUtLjI1OGMtLjgyMy0yLjI2Ni0yLjAxLTQuMTcxLTMuNTI1LTUuNjYxLTMuODgtMy44MTYtOS4xODQtNC44NS0xNC4xOTUtMi43NjYtNC4xNyAxLjcyNy03LjQzNyA2LjcwMi03LjQzNyAxMS4zMjgiIGZpbGw9IiNGRkYiLz4KICAgIDwvZz4KICA8L2c+Cjwvc3ZnPgo=",
+        "name": "Amazon EventBridge"
+      },
+      "statements": [
+        {
+          "action": "events:PutEvents",
+          "effect": "Allow",
+          "resource": "arn:aws:events:region:123456789012:event-bus/pretty-cool-events",
+          "service": "events",
+          "source": {
+            "index": "2",
+            "policyName": "AWSLambdaBasicExecutionRole",
+            "policyType": "managed"
+          }
+        }
+      ]
+    },
+    "secretsmanager": {
+      "service": {
+        "icon": "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNjQgNjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGcgdHJhbnNmb3JtPSJzY2FsZSguOCkiPgogICAgPGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgPHBhdGggZD0iTTAgMGg4MHY4MEgweiIgZmlsbD0iI0REMzQ0QyIvPgogICAgICA8cGF0aCBkPSJNMzguNzYgNDMuMzZBMS4yNDEgMS4yNDEgMCAxMDQwIDQyLjEyYy0uNjgzIDAtMS4yNC41NTYtMS4yNCAxLjI0em0tMiAwQTMuMjQzIDMuMjQzIDAgMDE0MCA0MC4xMmEzLjI0MyAzLjI0MyAwIDAxMy4yNCAzLjI0QTMuMjMyIDMuMjMyIDAgMDE0MSA0Ni40MjZWNDloLTJ2LTIuNTc0YTMuMjMyIDMuMjMyIDAgMDEtMi4yNC0zLjA2NnpNNDkgMzhIMzF2MTNoMTh2LTNoLTN2LTJoM3YtM2gtM3YtMmgzdi0zem0tMTUtMmgxMS45OTlMNDYgMzFjLjAwMS0yLjYxNi0yLjg1Ny00Ljk5OC01Ljk5Ni01aC0uMDAzYTYuNTk3IDYuNTk3IDAgMDAtNC4yMzggMS41NzVjLTEuMTIuOTYyLTEuNzYzIDIuMjExLTEuNzYzIDMuNDI2VjM2em0xNC00Ljk5OUw0Ny45OTkgMzZINTBhMSAxIDAgMDExIDF2MTVhMSAxIDAgMDEtMSAxSDMwYTEgMSAwIDAxLTEtMVYzN2ExIDEgMCAwMTEtMWgydi01Yy4wMDEtMS43OTguODk3LTMuNTk5IDIuNDU5LTQuOTQyQTguNjI5IDguNjI5IDAgMDE0MC4wMDEgMjRoLjAwM2M0LjI2MS4wMDIgNy45OTcgMy4yNzMgNy45OTYgNy4wMDF6TTE5LjIwNyA1NS4wNDlsMS42MjEtMS4xNzJjLTIuNzM1LTMuNzgtNC4yNDctOC4yMTUtNC40MzItMTIuODc3SDE5di0yaC0yLjYwMWMuMTk5LTQuNjM0IDEuNzA5LTkuMDQzIDQuNDI5LTEyLjgwMmwtMS42MjEtMS4xNzNjLTIuOTY4IDQuMTAzLTQuNjA4IDguOTE3LTQuODA4IDEzLjk3NUgxMnYyaDIuMzk2Yy4xODYgNS4wODYgMS44MjggOS45MjYgNC44MTEgMTQuMDQ5em0zNC42MzEgNC4xNTljLTMuNzY5IDIuNzI4LTguMTkgNC4yMzgtMTIuODM4IDQuNDMxVjYxaC0ydjIuNjM5Yy00LjY0OC0uMTkyLTkuMDctMS43MDItMTIuODQxLTQuNDMxbC0xLjE3MSAxLjYyYzQuMTEyIDIuOTc3IDguOTQgNC42MTcgMTQuMDEyIDQuODExVjY4aDJ2LTIuMzYxYzUuMDcyLS4xOTQgOS44OTgtMS44MzQgMTQuMDEtNC44MTFsLTEuMTcyLTEuNjJ6TTI2LjE1OSAyMC44NjZjMy43NzEtMi43MjggOC4xOTMtNC4yMzggMTIuODQxLTQuNDNWMTloMnYtMi41NjRjNC42NDguMTkyIDkuMDY5IDEuNzAyIDEyLjgzOCA0LjQzbDEuMTcyLTEuNjJjLTQuMTEyLTIuOTc2LTguOTM4LTQuNjE2LTE0LjAxLTQuODFWMTJoLTJ2Mi40MzZjLTUuMDcyLjE5My05LjkgMS44MzMtMTQuMDEyIDQuODFsMS4xNzEgMS42MnpNNjUuNTk5IDM5Yy0uMi01LjA1OC0xLjg0LTkuODcyLTQuODA5LTEzLjk3NWwtMS42MjEgMS4xNzNDNjEuODkgMjkuOTU3IDYzLjQgMzQuMzY2IDYzLjU5OSAzOUg2MXYyaDIuNjAyYy0uMTg2IDQuNjYyLTEuNjk3IDkuMDk3LTQuNDMzIDEyLjg3N2wxLjYyMSAxLjE3MmMyLjk4NC00LjEyMyA0LjYyNS04Ljk2MyA0LjgxMi0xNC4wNDlINjh2LTJoLTIuNDAxem0tOS4yMTMtMTMuOTM2bDcuODQtNy44NC0xLjQxNC0xLjQxNC03Ljg0IDcuODQgMS40MTQgMS40MTR6TTIzLjYxMiA1NS4wMWwtNy44NCA3Ljg0IDEuNDE0IDEuNDE0IDcuODQtNy44NC0xLjQxNC0xLjQxNHptNS4wNTQtMjcuNzU3bC0xNC44NDEtMTQuODQtMS40MTQgMS40MTQgMTQuODQxIDE0Ljg0IDEuNDE0LTEuNDE0ek01NC4xOTMgNTIuNzhsMTMuMzkzIDEzLjM5My0xLjQxNCAxLjQxNC0xMy4zOTMtMTMuMzkzIDEuNDE0LTEuNDE0eiIgZmlsbD0iI0ZGRiIvPgogICAgPC9nPgogIDwvZz4KPC9zdmc+Cg==",
+        "name": "AWS Secrets Manager"
+      },
+      "statements": [
+        {
+          "action": "secretsmanager:ListSecrets",
+          "effect": "Allow",
+          "resource": "arn:aws:secretsmanager:region:123456789012:secret:prod/secret-name",
+          "service": "secretsmanager",
+          "source": {
+            "index": "Statement1",
+            "policyName": "AWSLambdaBasicExecutionRole",
+            "policyType": "managed"
+          }
+        },
+        {
+          "action": "secretsmanager:DescribeSecret",
+          "effect": "Allow",
+          "resource": "arn:aws:secretsmanager:region:123456789012:secret:prod/secret-name",
+          "service": "secretsmanager",
+          "source": {
+            "index": "Statement1",
+            "policyName": "AWSLambdaBasicExecutionRole",
+            "policyType": "managed"
+          }
+        },
+        {
+          "action": "secretsmanager:GetSecretValue",
+          "effect": "Allow",
+          "resource": "arn:aws:secretsmanager:region:123456789012:secret:prod/secret-name",
+          "service": "secretsmanager",
+          "source": {
+            "index": "Statement1",
+            "policyName": "AWSLambdaBasicExecutionRole",
+            "policyType": "managed"
+          }
+        }
+      ]
+    }
+  },
+  "roleName": "Illumio-Lambda-Role",
+  "trustedEntities": [
+    "lambda.amazonaws.com"
+  ]
+}
