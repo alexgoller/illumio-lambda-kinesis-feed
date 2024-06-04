@@ -3,6 +3,10 @@
 Simple lambda to feed all your Illumio PCE audit and traffic events to AWS Kinesis data streams.
 This makes it simple to forward all traffic to e.g. S3 or AWS OpenSearch service using a AWS Firehose.
 
+The function queries the Illumio Core PCE events and traffic APIs and returns data in raw JSON format
+to hand over to the AWS Kinesis ARN specified in the KINESIS_ARN environment variable. Kinesis can then
+be used to transport the data to other destinations.
+
 ## Dependencies
 The script imports the following Python libraries:
 
@@ -44,3 +48,7 @@ Please note that this is a high-level overview of the script. For detailed infor
 ### Docker deployment
 
 * https://docs.aws.amazon.com/lambda/latest/dg/python-image.html
+
+## IAM
+
+A example role document is included.
